@@ -1,9 +1,6 @@
-package uet.oop.bomberman.graphics;
+package graphics;
 
 import javafx.scene.image.*;
-
-import java.awt.image.BufferedImage;
-import java.nio.IntBuffer;
 
 /**
  * Lưu trữ thông tin các pixel của 1 sprite (hình ảnh game)
@@ -216,9 +213,9 @@ public class Sprite {
 		}
 	}
 	
-	public static Sprite movingSprite(Sprite normal, Sprite x1, Sprite x2, int animate, int time) {
-		int calc = animate % time;
-		int diff = time / 3;
+	public static Sprite movingSprite(Sprite normal, Sprite x1, Sprite x2, double animate, double time) {
+		double calc = animate % time;
+		double diff = time / 3;
 		
 		if(calc < diff) {
 			return normal;

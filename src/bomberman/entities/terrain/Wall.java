@@ -1,5 +1,6 @@
-package uet.oop.bomberman.entities;
+package entities.terrain;
 
+import entities.Entity;
 import javafx.scene.image.Image;
 
 public class Wall extends Entity {
