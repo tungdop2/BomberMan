@@ -1,5 +1,7 @@
-package entities;
+package bomberman.entities;
 
+import bomberman.BombermanGame;
+import bomberman.entities.bomb.Bomb;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -22,7 +24,12 @@ public abstract class AnimatedEntity extends Entity {
 
     @Override
     public void update() {
-
+        if (_remove) {
+            if (this instanceof Bomb)
+            {
+                BombermanGame.bombs.remove(this);
+            }
+        }
     }
 
     @Override

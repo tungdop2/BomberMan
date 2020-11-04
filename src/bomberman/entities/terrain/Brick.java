@@ -1,6 +1,6 @@
-package entities.terrain;
+package bomberman.entities.terrain;
 
-import entities.Entity;
+import bomberman.entities.Entity;
 import javafx.scene.image.Image;
 
 public class Brick extends Entity {

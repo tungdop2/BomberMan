@@ -1,16 +1,18 @@
-package entities;
+package bomberman.entities;
 
+import bomberman.BombermanGame;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import graphics.Sprite;
+import bomberman.graphics.Sprite;
 
 public abstract class Entity {
     protected int x;
     protected int y;
     protected Image img;
+    protected boolean _remove = false;
 
     public Entity( int x, int y, Image img) {
         this.x = x;

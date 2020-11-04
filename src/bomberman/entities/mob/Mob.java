@@ -1,7 +1,6 @@
-package entities.mob;
+package bomberman.entities.mob;
 
-import entities.AnimatedEntity;
-import entities.Entity;
+import bomberman.entities.AnimatedEntity;
 import javafx.scene.image.Image;
 
 public abstract class Mob extends AnimatedEntity {

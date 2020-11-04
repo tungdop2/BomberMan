@@ -1,3 +1,5 @@
+package bomberman;
+
 import bomberman.entities.Entity;
 import bomberman.entities.bomb.Bomb;
 import bomberman.entities.mob.Bomber;
@@ -20,13 +22,12 @@ public class BombermanGame extends Application {
     public static final int WIDTH = 31;
     public static final int HEIGHT = 13;
 
+    public static List<Entity> mobs = new ArrayList<>();
+    public static List<Entity> bombs = new ArrayList<>();
+    public static List<Entity> textures = new ArrayList<>();
+
     private GraphicsContext gc;
     private Canvas canvas;
-
-    private List<Entity> mobs = new ArrayList<>();
-    private List<Entity> bombs = new ArrayList<>();
-    private List<Entity> textures = new ArrayList<>();
-
 
     private Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
     private Entity bomb = new Bomb(2, 2, Sprite.bomb.getFxImage());
@@ -52,6 +53,7 @@ public class BombermanGame extends Application {
         stage.setScene(scene);
         stage.show();
 
+        final double ns = 1000000000.0 / 60.0;
 
         AnimationTimer timer = new AnimationTimer() {
             @Override
@@ -60,6 +62,7 @@ public class BombermanGame extends Application {
                 update();
             }
         };
+
         timer.start();
 
         createMap();
@@ -85,7 +88,6 @@ public class BombermanGame extends Application {
     public void update() {
         mobs.forEach(Entity::update);
         bombs.forEach(Entity::update);
-
     }
 
     public void render() {
@@ -95,8 +97,5 @@ public class BombermanGame extends Application {
         bombs.forEach(g -> g.render(gc));
     }
 
-    public void remove(Bomb e)
-    {
-        bombs.remove(e);
-    }
+
 }

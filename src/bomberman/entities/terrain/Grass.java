@@ -1,7 +1,9 @@
-package entities.terrain;
+package bomberman.entities.terrain;
 
-import entities.Entity;
+import bomberman.entities.Entity;
 import javafx.scene.image.Image;
+
+import static bomberman.BombermanGame.*;
 
 public class Grass extends Entity {
 
@@ -11,6 +13,5 @@ public class Grass extends Entity {
 
     @Override
     public void update() {
-
     }
 }
