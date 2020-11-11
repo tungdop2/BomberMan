@@ -12,7 +12,11 @@ public abstract class Entity {
     protected int x;
     protected int y;
     protected Image img;
-    protected boolean _remove = false;
+    protected boolean remove = false;
+
+    public Entity() {
+
+    }
 
     public Entity( int x, int y, Image img) {
         this.x = x;
@@ -20,15 +24,32 @@ public abstract class Entity {
         this.img = img;
     }
 
-    public void render(GraphicsContext gc) {
-        SnapshotParameters params = new SnapshotParameters();
-        params.setFill(Color.TRANSPARENT);
-
-        ImageView iv = new ImageView(img);
-        Image base = iv.snapshot(params, null);
-
-        gc.drawImage(base, x * Sprite.SCALED_SIZE, y * Sprite.SCALED_SIZE);
+    public int getX() {
+        return x;
     }
 
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public void render(GraphicsContext gc) {
+        gc.drawImage(img, x, y);
+    }
+
+    public void setRemove(boolean remove) {
+        this.remove = remove;
+    }
+
+    public boolean isRemoved() {
+        return remove;
+    }
     public abstract void update();
 }

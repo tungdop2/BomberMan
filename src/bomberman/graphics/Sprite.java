@@ -230,7 +230,7 @@ public class Sprite {
 	
 	public static Sprite movingSprite(Sprite x1, Sprite x2, int animate, int time) {
 		int diff = time / 2;
-		return (animate % time > diff) ? x1 : x2; 
+		return (animate % time >= diff) ? x1 : x2;
 	}
 	
 	public int getSize() {
