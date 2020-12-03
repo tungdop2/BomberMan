@@ -239,6 +239,7 @@ public class BombermanGame extends Application {
 
     }
 
+    // Xin loi...
     public void createMap() {
         SoundEffect.start.play();
         mobs = new ArrayList<>();
@@ -342,6 +343,7 @@ public class BombermanGame extends Application {
         }
     }
 
+    // Xin loi...
     public void creatmapfromfile() {
         String url = "res/levels/Level" + level + ".txt";
 
@@ -364,6 +366,7 @@ public class BombermanGame extends Application {
         }
     }
 
+    // Haiz....
     public void update() {
 
         bomberman.setSpeed(speed);
@@ -432,6 +435,7 @@ public class BombermanGame extends Application {
         }
     }
 
+    // Bun wa...
     public void render() {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         textures.forEach(g -> g.render(gc));
@@ -456,6 +460,7 @@ public class BombermanGame extends Application {
         prevTime = curTime;
     }
 
+    // Hic
     public void restart() {
         render();
         update();
