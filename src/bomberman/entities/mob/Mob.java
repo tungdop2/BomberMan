@@ -10,6 +10,7 @@ import bomberman.entities.terrain.Grass;
 import bomberman.graphics.Sprite;
 import javafx.scene.image.Image;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Mob extends AnimatedEntity {
@@ -94,11 +95,6 @@ public abstract class Mob extends AnimatedEntity {
 
         return true;
     }
-
-    public boolean isMeet(Mob a, Mob b) {
-        return false;
-    }
-
     public abstract void kill();
 
     public boolean standOnObject(Entity b) {
@@ -180,5 +176,19 @@ public abstract class Mob extends AnimatedEntity {
             }
         }
         return true;
+    }
+
+    public void randomMove() {
+        ArrayList<Integer> _direction = new ArrayList<>();
+        if (canMove(x - getSpeed(), y)) _direction.add(1);
+        if (canMove(x + getFat() - 1 + getSpeed(), y)) _direction.add(0);
+        if (canMove(x, y + Sprite.SCALED_SIZE - 1 + getSpeed())) _direction.add(3);
+        if (canMove(x, y - getSpeed())) _direction.add(2);
+        if (_direction.size() == 0) {
+            setDirection(-1);
+        } else {
+            double index = Math.random() * (_direction.size());
+            setDirection(_direction.get((int) index));
+        }
     }
 }

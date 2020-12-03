@@ -14,6 +14,8 @@ import bomberman.entities.terrain.Brick;
 import bomberman.entities.terrain.Grass;
 import bomberman.entities.terrain.Wall;
 import bomberman.graphics.Sprite;
+import bomberman.musics.Sound;
+import bomberman.musics.SoundEffect;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.VPos;
@@ -27,8 +29,11 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import javax.sound.sampled.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -58,7 +63,7 @@ public class BombermanGame extends Application {
     private Scene scene;
     private long prevTime = 0;
     private long curTime;
-    private long startTime;
+    private long startTime = 0;
     private double fps;
 
     public static char[][] getMap() {
@@ -179,7 +184,8 @@ public class BombermanGame extends Application {
         Group root = new Group();
         root.getChildren().add(canvas);
 
-        // Tao nhac nen file:///res/musics/beat.mp3
+        //Tao nhac nen
+
 
         // Tao scene
         scene = new Scene(root, Sprite.SCALED_SIZE * WIDTH, Sprite.SCALED_SIZE * HEIGHT);
@@ -199,6 +205,7 @@ public class BombermanGame extends Application {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
+                SoundEffect.death.stop();
                 if (end_level) {
                     if (startTime == 0) {
                         level++;
@@ -224,6 +231,7 @@ public class BombermanGame extends Application {
                     }
                 } else {
                     if (bomberman.isRemoved()) {
+                        SoundEffect.start.stop();
                         restart();
                     } else {
                         play(stage);
@@ -236,16 +244,18 @@ public class BombermanGame extends Application {
     }
 
     public void createMap() {
+        SoundEffect.start.play();
         mobs = new ArrayList<>();
         bombs = new ArrayList<>();
         textures = new ArrayList<>();
         powers = new ArrayList<>();
         bricks = new ArrayList<>();
-
+        portal = null;
         setBomb_power(1);
-        setBomb_cout(2);
-        setSpeed(1);
+        setBomb_cout(1);
+        setSpeed(2);
         creatmapfromfile();
+
         for (int i = 0; i < HEIGHT; i++) {
             for (int j = 0; j < WIDTH; j++) {
                 Entity e;
@@ -319,7 +329,7 @@ public class BombermanGame extends Application {
                     }
                     case 'p': {
                         map[i][j] = ' ';
-                        bomberman = new Bomber(1 * Sprite.SCALED_SIZE, 1 * Sprite.SCALED_SIZE, Sprite.player_right.getFxImage());
+                        bomberman = new Bomber(i * Sprite.SCALED_SIZE, j * Sprite.SCALED_SIZE, Sprite.player_right.getFxImage());
                         mobs.add(bomberman);
                         e = new Grass(j * Sprite.SCALED_SIZE, i * Sprite.SCALED_SIZE, Sprite.grass.getFxImage());
                         textures.add(e);
@@ -454,6 +464,7 @@ public class BombermanGame extends Application {
         render();
         update();
         if (System.currentTimeMillis() - prevTime >= 1500) {
+            SoundEffect.death.stop();
             gc.setFill(Color.BLACK);
             gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
             gc.setTextAlign(TextAlignment.CENTER);
@@ -467,6 +478,7 @@ public class BombermanGame extends Application {
             );
         }
         if (System.currentTimeMillis() - prevTime >= 3000) {
+            startTime = 0;
             createMap();
             render();
         }

@@ -3,6 +3,8 @@ package bomberman.entities.bomb;
 import bomberman.BombermanGame;
 import bomberman.entities.AnimatedEntity;
 import bomberman.graphics.Sprite;
+import bomberman.musics.Sound;
+import bomberman.musics.SoundEffect;
 import javafx.scene.image.Image;
 
 public class Bomb extends AnimatedEntity {
@@ -23,6 +25,7 @@ public class Bomb extends AnimatedEntity {
         aliveTime = System.currentTimeMillis() - startTime;
 
         if (aliveTime >= 2000) {
+            new Sound("musics/explode.wav", 0).play();
             remove = true;
         }
 

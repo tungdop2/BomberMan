@@ -60,28 +60,6 @@ public class Balloom extends Enemy {
     }
 
     public void play() {
-        ArrayList<Integer> _direction = new ArrayList<>();
-        if (canMove(x - getSpeed(), y)) _direction.add(1);
-        if (canMove(x + getFat() - 1 + getSpeed(), y)) _direction.add(0);
-        if (canMove(x, y + Sprite.SCALED_SIZE - 1 + getSpeed())) _direction.add(3);
-        if (canMove(x, y - getSpeed())) _direction.add(2);
-        if (_direction.size() == 0) {
-            setDirection(-1);
-        } else {
-            double index = Math.random() * (_direction.size());
-            setDirection(_direction.get((int) index));
-        }
+        randomMove();
     }
-
-//    @Override
-//    public void kill() {
-//        if (getDeadTime() == -1) {
-//            setDeadTime(System.currentTimeMillis());
-//        }
-//        if (System.currentTimeMillis() - getDeadTime() <= 400) {
-//            img = Sprite.balloom_dead.getFxImage();
-//        } else {
-//            img = Sprite.movingSprite(Sprite.mob_dead1, Sprite.mob_dead2, Sprite.mob_dead3, System.currentTimeMillis() - getDeadTime(), 600).getFxImage();
-//        }
-//    }
 }

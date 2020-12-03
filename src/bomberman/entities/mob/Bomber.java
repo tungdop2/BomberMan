@@ -4,6 +4,7 @@ import bomberman.BombermanGame;
 import bomberman.entities.bomb.Bomb;
 import bomberman.entities.powerup.*;
 import bomberman.graphics.Sprite;
+import bomberman.musics.SoundEffect;
 import javafx.scene.image.Image;
 
 public class Bomber extends Mob {
@@ -24,7 +25,6 @@ public class Bomber extends Mob {
     @Override
     public void move() {
         if (!isRemoved()) {
-
             setMovethruBomb(false);
             for (int i = 0; i < BombermanGame.getBombs().size(); i++) {
                 Bomb b = BombermanGame.getBombs().get(i);
@@ -32,8 +32,8 @@ public class Bomber extends Mob {
                     setMovethruBomb(true);
                 }
             }
-
             play();
+            SoundEffect.run.play();
             switch (getDirection()) {
                 case 0: {
                     if (canMove(x + getSpeed() + getFat() - 1, y + Sprite.SCALED_SIZE / 8)
@@ -88,6 +88,7 @@ public class Bomber extends Mob {
                     break;
                 }
                 default: {
+                    SoundEffect.run.stop();
                     setDirection(-1);
                 }
             }
@@ -100,10 +101,10 @@ public class Bomber extends Mob {
                     BombermanGame.setBomb_power(BombermanGame.getBomb_power() + 1);
                     p.setRemove(true);
                 } else if (p instanceof SpeedItem) {
-                    BombermanGame.setSpeed(BombermanGame.getSpeed() + 1);
+                    BombermanGame.setSpeed(BombermanGame.getSpeed() * 2);
                     p.setRemove(true);
                 } else if (p instanceof BombItem) {
-                    BombermanGame.setBomb_cout(BombermanGame.getBomb_cout() * 2);
+                    BombermanGame.setBomb_cout(BombermanGame.getBomb_cout() + 1);
                     p.setRemove(true);
                 } else if (p instanceof Portal) {
                     if (BombermanGame.getMobs().size() == 1) {

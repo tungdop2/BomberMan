@@ -3,9 +3,12 @@ package bomberman.entities.bomb;
 import bomberman.BombermanGame;
 import bomberman.entities.AnimatedEntity;
 import bomberman.entities.bomb.Bomb;
+import bomberman.entities.mob.Bomber;
 import bomberman.entities.mob.Mob;
 import bomberman.entities.terrain.Brick;
 import bomberman.graphics.Sprite;
+import bomberman.musics.Sound;
+import bomberman.musics.SoundEffect;
 import javafx.scene.image.Image;
 
 import java.util.List;
@@ -44,6 +47,9 @@ public class Flame extends Bomb {
             mobs.forEach(m -> {
                 if (m.standOnObject(this)) {
                     m.setRemove(true);
+                    if (m instanceof Bomber) {
+                        SoundEffect.death.play();
+                    }
                 }
             });
 

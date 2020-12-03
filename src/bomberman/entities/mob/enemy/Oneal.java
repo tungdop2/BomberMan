@@ -117,17 +117,7 @@ public class Oneal extends Enemy {
             BFS(by * BombermanGame.WIDTH + bx);
             int ad = x / Sprite.SCALED_SIZE + y * BombermanGame.WIDTH / Sprite.SCALED_SIZE;
             if (path[ad] == -1) {
-                ArrayList<Integer> _direction = new ArrayList<>();
-                if (canMove(x - getSpeed(), y)) _direction.add(1);
-                if (canMove(x + getFat() - 1 + getSpeed(), y)) _direction.add(0);
-                if (canMove(x, y + Sprite.SCALED_SIZE - 1 + getSpeed())) _direction.add(3);
-                if (canMove(x, y - getSpeed())) _direction.add(2);
-                if (_direction.size() == 0) {
-                    setDirection(-1);
-                } else {
-                    double index = Math.random() * (_direction.size());
-                    setDirection(_direction.get((int) index));
-                }
+                randomMove();
             }
             if (path[ad] == ad + 1) {
                 setDirection(0);
