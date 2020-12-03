@@ -14,7 +14,6 @@ import bomberman.entities.terrain.Brick;
 import bomberman.entities.terrain.Grass;
 import bomberman.entities.terrain.Wall;
 import bomberman.graphics.Sprite;
-import bomberman.musics.Sound;
 import bomberman.musics.SoundEffect;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -29,11 +28,9 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-import javax.sound.sampled.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -184,8 +181,7 @@ public class BombermanGame extends Application {
         Group root = new Group();
         root.getChildren().add(canvas);
 
-        //Tao nhac nen
-
+        // Tao nhac nen file:///res/musics/beat.mp3
 
         // Tao scene
         scene = new Scene(root, Sprite.SCALED_SIZE * WIDTH, Sprite.SCALED_SIZE * HEIGHT);
@@ -205,7 +201,6 @@ public class BombermanGame extends Application {
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long l) {
-                SoundEffect.death.stop();
                 if (end_level) {
                     if (startTime == 0) {
                         level++;
@@ -464,7 +459,6 @@ public class BombermanGame extends Application {
         render();
         update();
         if (System.currentTimeMillis() - prevTime >= 1500) {
-            SoundEffect.death.stop();
             gc.setFill(Color.BLACK);
             gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
             gc.setTextAlign(TextAlignment.CENTER);
