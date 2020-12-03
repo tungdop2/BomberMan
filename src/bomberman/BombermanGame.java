@@ -28,6 +28,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import javax.xml.transform.Source;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -459,6 +460,7 @@ public class BombermanGame extends Application {
         render();
         update();
         if (System.currentTimeMillis() - prevTime >= 1500) {
+            SoundEffect.death.stop();
             gc.setFill(Color.BLACK);
             gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
             gc.setTextAlign(TextAlignment.CENTER);

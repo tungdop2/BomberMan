@@ -48,7 +48,7 @@ public class Flame extends Bomb {
                 if (m.standOnObject(this)) {
                     m.setRemove(true);
                     if (m instanceof Bomber) {
-                        new Sound("musics/death.wav", 0).play();
+                        SoundEffect.death.play();
                     }
                 }
             });
